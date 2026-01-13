@@ -3,219 +3,365 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amogh Kulkarni | Systems & Application Engineer</title>
+    <title>Amogh Kulkarni | Application Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --bg: #030712;
-            --card-bg: rgba(17, 24, 39, 0.6);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg: #020617;
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --border: rgba(56, 189, 248, 0.2);
             --primary: #38bdf8;
-            --secondary: #818cf8;
-            --accent: #22d3ee;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.6; scroll-behavior: smooth; }
-        #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; pointer-events: none; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-        .mono { font-family: 'JetBrains Mono', monospace; }
-        .gradient-text { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
-        .nav-links { display: flex; align-items: center; gap: 20px; }
-        .nav-links a { color: var(--text-muted); font-size: 0.9rem; text-decoration: none; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-        
-        .btn-primary { background: var(--primary); color: var(--bg); padding: 10px 20px; border-radius: 6px; font-weight: 700; transition: 0.3s; text-decoration: none; }
-        .btn-outline { border: 1px solid var(--primary); color: var(--primary); padding: 10px 20px; border-radius: 6px; font-weight: 700; transition: 0.3s; text-decoration: none; }
-        .btn-outline:hover { background: rgba(56, 189, 248, 0.1); }
 
-        .hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; }
-        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 24px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         
-        .section-title { font-size: 2rem; margin-top: 80px; margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
-        .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 50%);
+        }
+
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; filter: blur(1px); pointer-events: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+        nav { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 30px 0; position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .logo { font-family: 'JetBrains Mono', monospace; font-weight: 800; color: var(--primary); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+
+        .btn {
+            padding: 12px 24px; border-radius: 8px; font-weight: 700; 
+            text-decoration: none; transition: 0.4s; display: inline-flex; 
+            align-items: center; gap: 10px; cursor: pointer; border: none;
+        }
+        .btn-hire { background: var(--primary); color: #000; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); }
+        .btn-hire:hover { transform: scale(1.05); background: #7dd3fc; }
+
+        .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; padding-top: 60px; }
+        h1 { font-size: 5rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
+        .gradient-text { background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .section-title { font-size: 2.5rem; margin: 80px 0 40px; display: flex; align-items: center; gap: 20px; }
+        .section-title::after { content: ''; height: 1px; flex-grow: 1; background: var(--border); }
         
-        .grid-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.2); }
-        
-        .btn-link { color: var(--primary); text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; }
-        
-        .exp-item { border-left: 2px solid var(--border); padding: 0 0 40px 30px; position: relative; }
-        .exp-item::before { content: ''; position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
-        
-        footer { border-top: 1px solid var(--border); padding: 60px 0; margin-top: 100px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
-        .footer-col i { font-size: 1.8rem; margin-bottom: 12px; color: var(--primary); }
-        
-        .reveal { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s forwards; }
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-        
-        @media(max-width: 768px) { 
-            .footer-grid { grid-template-columns: 1fr; } 
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .card { 
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; 
+            padding: 30px; transition: 0.5s; position: relative;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); background: rgba(15, 23, 42, 0.9); }
+        .card .category { font-family: 'JetBrains Mono'; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 700; }
+        .card h3 { font-size: 1.6rem; margin-bottom: 12px; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; }
+        .github-link { color: var(--primary); text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+
+        .divider { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 60px 0; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; }
+        .timeline-item { border-left: 2px solid var(--border); padding-left: 25px; position: relative; margin-bottom: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: -7px; top: 0; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+        .time-tag { font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary); margin-bottom: 5px; display: block; }
+        .exp-list { list-style: none; margin-top: 15px; }
+        .exp-list li { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 10px; padding-left: 15px; position: relative; }
+        .exp-list li::before { content: '▹'; position: absolute; left: 0; color: var(--primary); }
+
+        .skills-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .skill-tag { background: rgba(56, 189, 248, 0.1); border: 1px solid var(--border); padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; transition: 0.3s; color: var(--text-dim); text-decoration: none; }
+        .skill-tag:hover { border-color: var(--primary); background: rgba(56, 189, 248, 0.2); color: var(--text); transform: translateY(-2px); }
+        .skill-tag i { margin-left: 5px; font-size: 0.7rem; }
+
+        footer { margin-top: 100px; padding: 80px 0 40px; border-top: 1px solid var(--border); text-align: center; }
+        .footer-grid { 
+            display: flex; justify-content: center; align-items: center; 
+            max-width: 1000px; margin: 0 auto; gap: 0; 
+        }
+        .footer-item { 
+            flex: 1; display: flex; flex-direction: column; align-items: center; 
+            gap: 12px; text-decoration: none; padding: 0 20px;
+        }
+        .footer-divider { width: 1px; height: 50px; background: var(--border); flex-shrink: 0; }
+        .footer-item i { font-size: 1.8rem; color: var(--primary); margin-bottom: 5px; }
+        .footer-item h4 { font-size: 1rem; letter-spacing: 1px; color: var(--text); }
+        .footer-item p, .footer-item a { color: var(--text-dim); font-size: 0.9rem; text-decoration: none; transition: 0.3s; }
+        .footer-item:hover p, .footer-item:hover i { color: var(--primary); }
+        .copyright { margin-top: 60px; font-family: 'JetBrains Mono'; font-size: 0.7rem; color: rgba(255,255,255,0.1); letter-spacing: 3px; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) { 
+            h1 { font-size: 3.2rem; } 
+            .footer-grid { flex-direction: column; gap: 40px; }
+            .footer-divider { display: none; }
             .nav-links { display: none; }
+            .container { padding: 0 25px; }
         }
     </style>
 </head>
 <body>
-    <div id="canvas-container"><canvas id="bgCanvas"></canvas></div>
-    
+
+    <canvas id="bg-canvas"></canvas>
+
     <div class="container">
         <nav>
-            <div class="logo mono" style="font-weight: 800; color: var(--primary);">&lt;AMOGH/&gt;</div>
+            <div class="logo">&lt; AMOGH /&gt;</div>
             <div class="nav-links">
-                <a href="#work">Projects</a>
+                <a href="#projects">Work</a>
                 <a href="#experience">Experience</a>
-                <a href="resume.pdf" download="Amogh_Kulkarni_Resume" class="btn-outline"><i class="fa-solid fa-download"></i> Download Resume</a>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mailtoarkulkarni@gmail.com&su=Job%20Inquiry" target="_blank" class="btn-primary">Hire Me</a>
+                <a href="#skills">Skills</a>
+                <a href="mailto:mailtoarkulkarni@gmail.com" class="btn btn-hire">Hire Me</a>
             </div>
         </nav>
 
         <section class="hero">
-            <h1 class="reveal">Amogh <span class="gradient-text">Kulkarni</span></h1>
-            <p class="reveal" style="color: var(--text-muted); max-width: 650px; font-size: 1.1rem;">
-                MCA Student at Dayanand Sagar Institutions & former Application Engineer at Suveechi Technologies. Specializing in **MERN stack**, **Enterprise Portals**, and **Predictive ML Models**.
-            </p>
+            <div class="reveal active">
+                <span style="color: var(--primary); font-family: 'JetBrains Mono'; font-weight: 700; font-size: 0.9rem;">[ APPLICATION ENGINEER ]</span>
+                <h1 style="margin-top: 15px;">Amogh <br><span class="gradient-text">Kulkarni</span></h1>
+                <p style="max-width: 600px; color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px;">
+                    Knowledgeable Application Engineer. I evaluate and integrate software to drive meaningful solutions, collaborating across teams to solve complex technical challenges.
+                </p>
+            </div>
         </section>
 
-        <section id="work">
+        <section id="projects">
             <h2 class="section-title">Project Ecosystem</h2>
-            <div class="grid-wrapper">
+            <div class="projects-grid">
+                
                 <div class="card reveal">
                     <div>
-                        <div class="mono" style="color:var(--primary); font-size: 0.8rem; margin-bottom: 8px;">MERN / ALGORITHMS</div>
+                        <span class="category" style="color: #38bdf8;">MERN / ALGORITHMS</span>
                         <h3>MernPathFinder</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Interactive pathfinding visualizer built with MongoDB, Express, React, and Node.js.</p>
+                        <p>Interactive pathfinding visualizer built with MongoDB, Express, React, and Node.js.</p>
                     </div>
-                    <a href="https://github.com/amoghk123/MernPathFinder" target="_blank" class="btn-link">Github Repo <i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/amoghk123/MernPathFinder" target="_blank" class="github-link">Github Repo <i class="fa-brands fa-github"></i></a>
                 </div>
-                <div class="card reveal" style="animation-delay: 0.1s;">
+
+                <div class="card reveal">
                     <div>
-                        <div class="mono" style="color:var(--secondary); font-size: 0.8rem; margin-bottom: 8px;">ENTERPRISE</div>
+                        <span class="category" style="color: #818cf8;">ENTERPRISE</span>
                         <h3>EmpWebPortal</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Comprehensive employee portal for corporate data management and workflow automation.</p>
+                        <p>Comprehensive employee portal for corporate data management and workflow automation.</p>
                     </div>
-                    <a href="https://github.com/amoghk123/EmpWebPortal" target="_blank" class="btn-link">Github Repo <i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/amoghk123/EmpWebPortal" target="_blank" class="github-link">Github Repo <i class="fa-brands fa-github"></i></a>
                 </div>
-                <div class="card reveal" style="animation-delay: 0.2s;">
+
+                <div class="card reveal">
                     <div>
-                        <div class="mono" style="color:var(--accent); font-size: 0.8rem; margin-bottom: 8px;">ML / DATA ANALYTICS</div>
+                        <span class="category" style="color: #c084fc;">ML / DATA ANALYTICS</span>
                         <h3>Water Quality</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Predictive system analyzing water safety parameters using Machine Learning (CatBoost).</p>
+                        <p>Predictive system analyzing water safety parameters using Machine Learning (CatBoost).</p>
                     </div>
-                    <a href="https://github.com/amoghk123/Water_quality_monitoring" target="_blank" class="btn-link">Github Repo <i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/amoghk123/Water_quality_monitoring" target="_blank" class="github-link">Github Repo <i class="fa-brands fa-github"></i></a>
                 </div>
-                <div class="card reveal" style="animation-delay: 0.3s;">
+
+                <div class="card reveal">
                     <div>
-                        <div class="mono" style="color:#f472b6; font-size: 0.8rem; margin-bottom: 8px;">CAPSTONE</div>
+                        <span class="category" style="color: #f472b6;">CAPSTONE</span>
                         <h3>Cap-Project</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Final-year major project demonstrating complex system integration and architecture.</p>
+                        <p>Final-year major project demonstrating complex system integration and architecture.</p>
                     </div>
-                    <a href="https://github.com/amoghk123/Cap-Project" target="_blank" class="btn-link">Github Repo <i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/amoghk123/Cap-Project" target="_blank" class="github-link">Github Repo <i class="fa-brands fa-github"></i></a>
                 </div>
-                <div class="card reveal" style="animation-delay: 0.4s;">
+
+                <div class="card reveal">
                     <div>
-                        <div class="mono" style="color:#fbbf24; font-size: 0.8rem; margin-bottom: 8px;">JAVASCRIPT</div>
+                        <span class="category" style="color: #fbbf24;">JAVASCRIPT</span>
                         <h3>Simple Todo</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Streamlined productivity application built with focus on DOM manipulation.</p>
+                        <p>Streamlined productivity application built with focus on DOM manipulation.</p>
                     </div>
-                    <a href="https://github.com/amoghk123/simple-todo" target="_blank" class="btn-link">Github Repo <i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/amoghk123/simple-todo" target="_blank" class="github-link">Github Repo <i class="fa-brands fa-github"></i></a>
                 </div>
-                <div class="card reveal" style="animation-delay: 0.5s;">
+
+                <div class="card reveal">
                     <div>
-                        <div class="mono" style="color:#10b981; font-size: 0.8rem; margin-bottom: 8px;">PYTHON</div>
+                        <span class="category" style="color: #34d399;">PYTHON</span>
                         <h3>Python Project</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Backend development scripts and automation tools built with Python.</p>
+                        <p>Backend development scripts and automation tools built with Python.</p>
                     </div>
-                    <a href="https://github.com/amoghk123/pythonproject" target="_blank" class="btn-link">Github Repo <i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/amoghk123/pythonproject" target="_blank" class="github-link">Github Repo <i class="fa-brands fa-github"></i></a>
                 </div>
-                <div class="card reveal" style="animation-delay: 0.6s;">
+
+                <div class="card reveal">
                     <div>
-                        <div class="mono" style="color:#ef4444; font-size: 0.8rem; margin-bottom: 8px;">PORTFOLIO</div>
+                        <span class="category" style="color: #ff5f57;">PORTFOLIO</span>
                         <h3>Portfolio Source</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">The code behind this interactive resume, showcasing UI/UX and web skills.</p>
+                        <p>The code behind this interactive resume, showcasing UI/UX and web development skills.</p>
                     </div>
-                    <a href="https://github.com/amoghk123/portfolio" target="_blank" class="btn-link">Github Repo <i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/amoghk123/portfolio" target="_blank" class="github-link">Github Repo <i class="fa-brands fa-github"></i></a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="experience">
+            <h2 class="section-title">Career Trajectory</h2>
+            <div class="info-grid">
+                <div class="reveal">
+                    <div class="timeline-item">
+                        <span class="time-tag">Nov 2023 — June 2024</span>
+                        <h3>Application Engineer</h3>
+                        <p style="color: var(--primary); font-weight: 600;">Suveechi Technologies</p>
+                        <ul class="exp-list">
+                            <li>Optimized performance and product innovation through technical aptitude.</li>
+                            <li>Deployed scalable software products within tight deadlines.</li>
+                            <li>Upgraded software performance and provided technical customer support.</li>
+                            <li>Identified future business opportunities to strengthen corporation mission.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="timeline-item">
+                        <span class="time-tag">2024 — 2026 (Ongoing)</span>
+                        <h3>Master of Computer Application</h3>
+                        <p>Dayanand Sagar Institutions</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-tag">2020 — 2023</span>
+                        <h3>B.C.A (Data Analytics)</h3>
+                        <p>Jain University | <strong>8.30 CGPA</strong></p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience">
-            <h2 class="section-title">Trajectory</h2>
-            <div class="exp-item reveal">
-                <span class="mono" style="color:var(--text-muted); font-size: 0.8rem;">2024 - 2026 (Ongoing)</span>
-                <div style="font-weight: 700; font-size: 1.2rem;">Master of Computer Application</div>
-                <div style="color: var(--primary);">Dayanand Sagar Institutions</div>
-            </div>
-            <div class="exp-item reveal" style="animation-delay: 0.1s;">
-                <span class="mono" style="color:var(--text-muted); font-size: 0.8rem;">Nov 2023 - June 2024</span>
-                <div style="font-weight: 700; font-size: 1.2rem;">Application Engineer</div>
-                <div style="color: var(--primary);">Suveechi Technologies</div>
+        <div class="divider"></div>
+
+        <section id="skills">
+            <h2 class="section-title">Technical Arsenal</h2>
+            <div class="info-grid">
+                <div class="reveal">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">Hard Skills</h4>
+                    <div class="skills-wrap">
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Data Warehouse</span>
+                        <span class="skill-tag">R</span>
+                    </div>
+                    <h4 style="color: var(--primary); margin-top: 30px; margin-bottom: 10px;">Certificates (Click to Download)</h4>
+                    <div class="skills-wrap">
+                        <a href="ccst_networking.pdf" download class="skill-tag">CCST Networking (Cisco) <i class="fa-solid fa-download"></i></a>
+                        <a href="data_analytics_iit.pdf" download class="skill-tag">Data Analytics (IIT Madras) <i class="fa-solid fa-download"></i></a>
+                        <a href="data_analyst.pdf" download class="skill-tag">Data Analyst <i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">Soft Skills</h4>
+                    <div class="skills-wrap">
+                        <span class="skill-tag">Observation</span>
+                        <span class="skill-tag">Decision Making</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Multi-tasking</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <footer>
-            <div class="footer-grid">
-                <div class="footer-col reveal">
+            <div class="footer-grid reveal">
+                <a href="https://github.com/amoghk123" target="_blank" class="footer-item">
                     <i class="fa-brands fa-github"></i>
                     <h4>GitHub</h4>
-                    <a href="https://github.com/amoghk123" target="_blank" style="color: var(--text-muted); text-decoration: none;">amoghk123</a>
-                </div>
-                <div class="footer-col reveal" style="animation-delay: 0.1s;">
+                    <p>amoghk123</p>
+                </a>
+                
+                <div class="footer-divider"></div>
+
+                <div class="footer-item">
                     <i class="fa-solid fa-phone"></i>
                     <h4>Phone</h4>
-                    <p style="color: var(--text-muted);">8971477755</p>
+                    <p>8971477755</p>
                 </div>
-                <div class="footer-col reveal" style="animation-delay: 0.2s;">
+
+                <div class="footer-divider"></div>
+
+                <a href="mailto:mailtoarkulkarni@gmail.com" class="footer-item">
                     <i class="fa-solid fa-envelope"></i>
                     <h4>Email</h4>
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mailtoarkulkarni@gmail.com" target="_blank" style="color: var(--text-muted); text-decoration: none;">mailtoarkulkarni@gmail.com</a>
-                </div>
+                    <p>mailtoarkulkarni@gmail.com</p>
+                </a>
             </div>
-            <p class="mono" style="margin-top: 50px; text-align: center; color: rgba(255,255,255,0.1); font-size: 0.7rem;">
-                © AMOGH KULKARNI
-            </p>
+            <p class="copyright">© AMOGH KULKARNI</p>
         </footer>
     </div>
 
     <script>
-        const canvas = document.getElementById('bgCanvas');
+        const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize);
-        resize();
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for(let i=0; i<80; i++) particles.push(new Particle());
+        }
 
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.v = { x: (Math.random() - 0.5) * 0.4, y: (Math.random() - 0.5) * 0.4 };
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+                this.size = Math.random() * 1.5 + 0.5;
+                this.vx = Math.random() * 0.4 - 0.2;
+                this.vy = Math.random() * 0.4 - 0.2;
             }
             update() {
-                this.x += this.v.x; this.y += this.v.y;
-                if (this.x < 0 || this.x > canvas.width) this.v.x *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.v.y *= -1;
-                this.draw();
+                this.x += this.vx; this.y += this.vy;
+                if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
             }
         }
-        for (let i = 0; i < 70; i++) particles.push(new Particle());
+
+        function connect() {
+            for(let a=0; a<particles.length; a++) {
+                for(let b=a; b<particles.length; b++) {
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 150) {
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 - dist/1000})`;
+                        ctx.lineWidth = 0.5; ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y); ctx.stroke();
+                    }
+                }
+            }
+        }
+
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => p.update());
-            requestAnimationFrame(animate);
+            particles.forEach(p => { p.update(); p.draw(); });
+            connect(); requestAnimationFrame(animate);
         }
-        animate();
+
+        window.addEventListener('resize', init);
+        init(); animate();
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
